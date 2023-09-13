@@ -6,6 +6,7 @@ from ReLU import ReLU
 from Softmax import Softmax
 from CrossEntropy import CrossEntropy
 import numpy as np
+import time
 
 # load mnist dataset
 train_data, train_label, test_data, test_label = load_mnist()
@@ -36,14 +37,17 @@ batch_size = 256
 N_iter = train_data.shape[0] // batch_size
 lr = 0.02
 
+print("Training start!")
+start_time = time.time()
 # train the network
 for epoch in range(5):
+    print("---------------------")
     for i in range(N_iter):
         input = train_data[i * batch_size:(i + 1) * batch_size, :, :, :]
         label = np.eye(10)[train_label[i * batch_size:(i + 1) * batch_size]]
 
-        # forwardpropagation
-        x = conv1.forward(input)
+        # forward propagation
+        x= conv1.forward(input)
         x = relu1.forward(x)
         x = pool1.forward(x)
         x = x.reshape((batch_size, -1))  # Flatten the output for FC layer
@@ -59,7 +63,7 @@ for epoch in range(5):
         if epoch % 1 == 0 and i == 0:
             print("epoch: ", epoch)
             print("Loss: ", L)
-            print((batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
+            print("accuracy: ",(batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
 
         # backpropagation
         grad = loss_function.backward()
@@ -77,10 +81,13 @@ for epoch in range(5):
         fc1.weight_update(lr)
         fc2.weight_update(lr)
 
+end_time = time.time()
+print("Training completed! Training Time:{}".format(end_time - start_time))
 # test the network
 N = 0
 n = 0
 N_iter = test_data.shape[0] // batch_size
+print("Inference start")
 
 for i in range(N_iter):
     input = test_data[i * batch_size:(i + 1) * batch_size, :, :, :]
@@ -102,3 +109,5 @@ for i in range(N_iter):
 
 # calculate the accuracy
 print("final accuracy for test is: ", n / N * 100, "%")
+end_time2 = time.time()
+print("Inference completed! Inference Time:{}".format(end_time2 - end_time))

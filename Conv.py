@@ -1,5 +1,6 @@
 import numpy
 import numpy as np
+# import time
 from scipy.signal import convolve2d
 
 
@@ -13,6 +14,7 @@ class Conv():
         self.bias_gradient = None
 
     def forward(self, input):
+        # start_time = time.time()
         # save the input for gradient calculation
         self.last_input = input
 
@@ -41,10 +43,14 @@ class Conv():
         # output[n, d2, :, :] += self.bias[d2]
         # print(self.weights.shape)  # weight size
         # print(d1, d2)  # index
+        # end_time = time.time()
+        # print("Cov Forward Time:", end_time - start_time)
 
         return output
 
     def backward(self, input_gradient):
+        # start_time = time.time()
+
         B, H1, W1, D2 = input_gradient.shape  # 获取输入梯度的形状
         B, H, W, D1 = self.last_input.shape  # 获取上一次输入的形状
         k1, k2, D1, D2 = self.weights.shape  # 获取权重的形状
@@ -71,6 +77,8 @@ class Conv():
                                                                np.rot90(self.weights[:, :, d1, d2], 2), mode='valid')
 
         self.ok_to_update = True
+        # end_time = time.time()
+        # print("Cov Backward Time:", end_time - start_time)
         return output_gradient
 
     def weight_update(self, lr=0.1):

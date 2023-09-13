@@ -2,7 +2,6 @@ import numpy
 import numpy as np
 import scipy
 
-
 class FC():
     def __init__(self, D1, D2):
         self.weights = np.random.randn(D1, D2) * np.sqrt(2 / (D1))
