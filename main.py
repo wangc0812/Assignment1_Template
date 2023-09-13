@@ -14,17 +14,22 @@ print("Train data shape: {}, train laberl number: {}".format(train_data.shape, t
 print("Test data shape: {}, test laberl number: {}".format(test_data.shape, test_label.shape[0]))
 
 # instantiate the network layers
-# Instantiate the network layers
 conv1 = Conv(5, 5, 1, 8)
+# kernel size: 5x5
+# channel number:1
+# number of kernels:8
 relu1 = ReLU()
+# ReLU activation
 pool1 = AvgPool(2)
+# window size 2 x 2
 fc1 = FC(1152, 128)
+# fully connected layer
+# input size :1152
+# output size :128
 relu2 = ReLU()
 fc2 = FC(128, 10)
 softmax = Softmax()
 loss_function = CrossEntropy()
-
-
 
 # define the training params
 batch_size = 256
@@ -53,9 +58,8 @@ for epoch in range(5):
         # Print loss and accuracy for every epoch
         if epoch % 1 == 0 and i == 0:
             print("epoch: ", epoch)
-            print(L)
+            print("Loss: ", L)
             print((batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
-
 
         # backpropagation
         grad = loss_function.backward()
@@ -72,7 +76,6 @@ for epoch in range(5):
         conv1.weight_update(lr)
         fc1.weight_update(lr)
         fc2.weight_update(lr)
-
 
 # test the network
 N = 0
