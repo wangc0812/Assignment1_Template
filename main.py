@@ -14,20 +14,15 @@ print("Train data shape: {}, train laberl number: {}".format(train_data.shape, t
 print("Test data shape: {}, test laberl number: {}".format(test_data.shape, test_label.shape[0]))
 
 # instantiate the network layers
-conv1 = Conv(k1=5, k2=5, D1=1, D2=32)
+# Instantiate the network layers
+conv1 = Conv(5, 5, 1, 8)
 relu1 = ReLU()
-pool1 = AvgPool(k=2)
-
-conv2 = Conv(k1=5, k2=5, D1=32, D2=64)
+pool1 = AvgPool(2)
+fc1 = FC(1152, 128)
 relu2 = ReLU()
-pool2 = AvgPool(k=2)
-
-fc1 = FC(D1=7 * 7 * 64, D2=128)
-relu3 = ReLU()
-
-fc2 = FC(D1=128, D2=10)
+fc2 = FC(128, 10)
 softmax = Softmax()
-cross_entropy = CrossEntropy()
+loss_function = CrossEntropy()
 
 
 
@@ -43,58 +38,41 @@ for epoch in range(5):
         label = np.eye(10)[train_label[i * batch_size:(i + 1) * batch_size]]
 
         # forwardpropagation
-        conv1_output = conv1.forward(input)
-        relu1_output = relu1.forward(conv1_output)
-        pool1_output = pool1.forward(relu1_output)
+        x = conv1.forward(input)
+        x = relu1.forward(x)
+        x = pool1.forward(x)
+        x = x.reshape((batch_size, -1))  # Flatten the output for FC layer
+        x = fc1.forward(x)
+        x = relu2.forward(x)
+        x = fc2.forward(x)
+        x = softmax.forward(x)
 
-        conv2_output = conv2.forward(pool1_output)
-        relu2_output = relu2.forward(conv2_output)
-        pool2_output = pool2.forward(relu2_output)
+        # Calculate loss
+        L = loss_function.forward(x, label)
 
-        fc_input = pool2_output.reshape((batch_size, -1))
-
-        fc1_output = fc1.forward(fc_input)
-        relu3_output = relu3.forward(fc1_output)
-
-        fc2_output = fc2.forward(relu3_output)
-        x = softmax.forward(fc2_output)
-
-        cross_entropy_loss = CrossEntropy.forward(x, label)
-        L = np.mean(cross_entropy_loss)
-
+        # Print loss and accuracy for every epoch
         if epoch % 1 == 0 and i == 0:
             print("epoch: ", epoch)
-            print("Loss:", L)
-            accuracy = (batch_size - np.count_nonzero(
-                np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size
-            print("Accuracy:", accuracy)
-            # print(L)
-            # print((batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
+            print(L)
+            print((batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
+
 
         # backpropagation
-        cross_entropy_gradient = CrossEntropy.backward(label)  # Gradient of loss w.r.t. softmax output
+        grad = loss_function.backward()
+        grad = softmax.backward(grad)
+        grad = fc2.backward(grad)
+        grad = relu2.backward(grad)
+        grad = fc1.backward(grad)
+        grad = grad.reshape((batch_size, 12, 12, 8))  # Reshape gradient to match pool1 output shape
+        grad = pool1.backward(grad)
+        grad = relu1.backward(grad)
+        grad = conv1.backward(grad)
 
-        # Backpropagate through fully connected layers
-        fc2_gradient = fc2.backward(cross_entropy_gradient)
-        relu3_gradient = relu3.backward(fc2_gradient)
-        fc1_gradient = fc1.backward(relu3_gradient)
-
-        # Reshape gradient for convolution layers
-        pool2_gradient = fc1_gradient.reshape(pool2_output.shape)
-
-        # Backpropagate through convolution and pooling layers
-        conv2_gradient = pool2.backward(pool2_gradient)
-        relu2_gradient = conv2.backward(conv2_gradient)
-
-        pool1_gradient = relu2_gradient
-        conv1_gradient = pool1.backward(pool1_gradient)
-        relu1_gradient = conv1.backward(conv1_gradient)
-
-        # weight update
+        # Weight update
         conv1.weight_update(lr)
-        conv2.weight_update(lr)
         fc1.weight_update(lr)
         fc2.weight_update(lr)
+
 
 # test the network
 N = 0
@@ -106,23 +84,16 @@ for i in range(N_iter):
     label = np.eye(10)[test_label[i * batch_size:(i + 1) * batch_size]]
 
     # inference
-    conv1_output = conv1.forward(input)
-    relu1_output = relu1.forward(conv1_output)
-    pool1_output = pool1.forward(relu1_output)
+    x = conv1.forward(input)
+    x = relu1.forward(x)
+    x = pool1.forward(x)
+    x = x.reshape((batch_size, -1))  # Flattening the output for the fully connected layer
+    x = fc1.forward(x)
+    x = relu2.forward(x)
+    x = fc2.forward(x)
+    x = softmax.forward(x)
 
-    conv2_output = conv2.forward(pool1_output)
-    relu2_output = relu2.forward(conv2_output)
-    pool2_output = pool2.forward(relu2_output)
-
-    fc_input = pool2_output.reshape((batch_size, -1))
-
-    fc1_output = fc1.forward(fc_input)
-    relu3_output = relu3.forward(fc1_output)
-
-    fc2_output = fc2.forward(relu3_output)
-    x = softmax.forward(fc2_output)
-
-    # get the label
+    # Get the label
     N += batch_size
     n += batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))
 

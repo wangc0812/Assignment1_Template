@@ -17,26 +17,30 @@ class Conv():
         self.last_input = input
 
         # Get input shape
-        B, H, W, D1 = input.shape
+        B, H1, W1, D1 = input.shape
 
-        # Get filter dimensions
+        # Get weight dimensions
         k1, k2, _, D2 = self.weights.shape
 
         # Calculate output dimensions
-        output_height = H - k1 + 1
-        output_width = W - k2 + 1
+        H2 = H1 - k1 + 1
+        W2 = W1 - k2 + 1
 
-        # Initialize output
-        output = np.zeros((B, output_height, output_width, D2))
+        output = np.zeros((B, H2, W2, D2))
 
         # Perform convolution for each filter
-        for i in range(D2):  # for each output channel
-            for j in range(D1):  # for each input channel
-                output[:, :, :, i] += convolve2d(input[:, :, :, j], self.weights[:, :, j, i], mode='valid')
-        # Add bias
-        output += self.bias[None, None, None, :]
+        for n in range(B):
+            for d2 in range(D2):
+                for d1 in range(D1):
+                    output[n, :, :, d2] += convolve2d(input[n, :, :, d1], self.weights[:, :, d1, d2], mode='valid')
+                output[n, :, :, d2] += self.bias[d2]
 
-        self.ok_to_update = True
+                    # conv_result = convolve2d(input[n, :, :, d1], self.weights[:, :, d1, d2], mode='valid')
+                    # print(conv_result.shape)
+                    # print(output[n, d2, :, :].shape)
+                    # output[n, d2, :, :] += self.bias[d2]
+                    # print(self.weights.shape)  # 打印权重数组的形状
+                    # print(d1, d2)  # 打印索引
 
         return output
 
@@ -45,27 +49,34 @@ class Conv():
         B, H, W, D1 = self.last_input.shape
         k1, k2, D1, D2 = self.weights.shape
 
-        # Initialize gradients
-        self.weight_gradient = np.zeros((k1, k2, D1, D2))
-
         # calculate the gradient dL/dX
+
+        # Initialize the output gradient
         output_gradient = np.zeros((B, H, W, D1))
-        for i in range(D2):
-            for j in range(D1):
-                for b in range(B):
-                    output_gradient[b, :, :, j] += np.correlate(input_gradient[b, :, :, i], self.weights[:, :, j, i],
-                                                                mode='full')
+
+        # Flip the weights for calculating gradient w.r.t. input
+        flipped_weights = self.weights[::-1, ::-1, :, :]
+
+        # Loop to calculate the gradient w.r.t. input
+        for n in range(B):
+            for d1 in range(D1):
+                for d2 in range(D2):
+                    output_gradient[n, :, :, d1] += convolve2d(input_gradient[n, :, :, d2],
+                                                               flipped_weights[:, :, d1, d2], mode='full')
 
         # calculate the gradient dL/dW across miniBatch
-        for i in range(D2):
-            for j in range(D1):
-                self.weight_gradient[:, :, j, i] = np.sum(
-                    [np.correlate(self.last_input[b, :, :, j], input_gradient[b, :, :, i], mode='valid')
-                     for b in range(B)], axis=0
-                ) / B
+            # Initialize weight gradients to zeros
+            self.weight_gradient = np.zeros_like(self.weights)
+
+            # Loop to calculate the gradient w.r.t weights
+            for n in range(B):
+                for d1 in range(D1):
+                    for d2 in range(D2):
+                        self.weight_gradient[:, :, d1, d2] += convolve2d(self.last_input[n, :, :, d1],
+                                                                         input_gradient[n, :, :, d2], mode='valid')
 
         # calculate the gradient  dL/db across miniBatch
-        self.bias_gradient = np.sum(input_gradient, axis=(0, 1, 2)) / B
+        self.bias_gradient = input_gradient.sum(axis=(0, 1, 2))
 
         self.ok_to_update = True
         return output_gradient
