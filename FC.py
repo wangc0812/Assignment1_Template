@@ -2,6 +2,7 @@ import numpy
 import numpy as np
 import scipy
 
+
 class FC():
     def __init__(self, D1, D2):
         self.weights = np.random.randn(D1, D2) * np.sqrt(2 / (D1))
@@ -16,7 +17,9 @@ class FC():
         self.last_input = input
 
         # fc layer forward calculation
+        # output = self.weights.T @ input + self.bias
         output = np.dot(input, self.weights) + self.bias
+        # weight size D1 X D2
 
         self.ok_to_update = True
 

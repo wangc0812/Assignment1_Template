@@ -10,15 +10,16 @@ import time
 
 # load mnist dataset
 train_data, train_label, test_data, test_label = load_mnist()
-
+# x = [6000, 28, 28, 1]
 print("Train data shape: {}, train laberl number: {}".format(train_data.shape, train_label.shape[0]))
 print("Test data shape: {}, test laberl number: {}".format(test_data.shape, test_label.shape[0]))
 
 # instantiate the network layers
 conv1 = Conv(5, 5, 1, 8)
 # kernel size: 5x5
-# channel number:1
-# number of kernels:8
+# K1 = K2 = 5
+# channel number = D1 = 1
+# number of kernels = D2 = 8
 relu1 = ReLU()
 # ReLU activation
 pool1 = AvgPool(2)
@@ -94,7 +95,7 @@ for i in range(N_iter):
     label = np.eye(10)[test_label[i * batch_size:(i + 1) * batch_size]]
 
     # inference
-    x = conv1.forward(input)
+    x = conv1.forward_ori(input)
     x = relu1.forward(x)
     x = pool1.forward(x)
     x = x.reshape((batch_size, -1))  # Flattening the output for the fully connected layer

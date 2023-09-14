@@ -2,6 +2,7 @@ import numpy
 import numpy as np
 # import time
 from scipy.signal import convolve2d
+from concurrent.futures import ThreadPoolExecutor
 
 
 class Conv():
@@ -13,9 +14,18 @@ class Conv():
         self.weight_gradient = None
         self.bias_gradient = None
 
+    @staticmethod
+    def convolve_single_batch(args):
+        n, input, weights, bias, D2, D1, H2, W2 = args
+        output = np.zeros((H2, W2, D2))
+        for d2 in range(D2):  # each output channel / kernel
+            for d1 in range(D1):  # each input channel
+                output[:, :, d2] += convolve2d(input[n, :, :, d1], weights[:, :, d1, d2], mode='valid')
+            output[:, :, d2] += bias[d2]
+        return output
+
     def forward(self, input):
-        # start_time = time.time()
-        # save the input for gradient calculation
+        # Save the input for the backward calculation
         self.last_input = input
 
         # Get input shape
@@ -28,12 +38,39 @@ class Conv():
         H2 = H1 - k1 + 1
         W2 = W1 - k2 + 1
 
+        # Create a list of arguments for each batch
+        args = [(n, input, self.weights, self.bias, D2, D1, H2, W2) for n in range(B)]
+
+        # Perform convolution for each batch in parallel using ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            output = list(executor.map(self.convolve_single_batch, args))
+
+        # Convert list of arrays to a single array
+        output = np.array(output)
+
+        return output
+
+    def forward_ori(self, input):
+        # start_time = time.time()
+        # save the input for gradient calculation
+        self.last_input = input
+
+        # Get input shape
+        B, H1, W1, D1 = input.shape
+        # B = number of IFM
+
+        # Get weight dimensions
+        k1, k2, D1, D2 = self.weights.shape
+
+        # Calculate output dimensions
+        H2 = H1 - k1 + 1
+        W2 = W1 - k2 + 1
         output = np.zeros((B, H2, W2, D2))
 
         # Perform convolution for each filter
         for n in range(B):  # each batch
             for d2 in range(D2):  # each output channel / kernel
-                for d1 in range(D1): # each input channel
+                for d1 in range(D1):  # each input channel
                     output[n, :, :, d2] += convolve2d(input[n, :, :, d1], self.weights[:, :, d1, d2], mode='valid')
                 output[n, :, :, d2] += self.bias[d2]
 
@@ -94,3 +131,4 @@ class Conv():
             self.ok_to_update = False
         else:
             print("No gradients available for update. ")
+
