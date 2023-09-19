@@ -1,4 +1,3 @@
-import numpy
 import numpy as np
 # import time
 from scipy.signal import convolve2d
@@ -21,6 +20,8 @@ class Conv():
         for d2 in range(D2):  # each output channel / kernel
             for d1 in range(D1):  # each input channel
                 output[:, :, d2] += convolve2d(input[n, :, :, d1], weights[:, :, d1, d2], mode='valid')
+                # d1 : current input channel
+                # d2 : current kernel / output channel
             output[:, :, d2] += bias[d2]
         return output
 

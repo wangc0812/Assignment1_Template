@@ -48,7 +48,7 @@ for epoch in range(5):
         label = np.eye(10)[train_label[i * batch_size:(i + 1) * batch_size]]
 
         # forward propagation
-        x= conv1.forward(input) # we use multi-thread to accelerate training process
+        x = conv1.forward(input)  # we use multi-thread to accelerate training process
         x = relu1.forward(x)
         x = pool1.forward(x)
         x = x.reshape((batch_size, -1))  # Flatten the output for FC layer
@@ -64,7 +64,8 @@ for epoch in range(5):
         if epoch % 1 == 0 and i == 0:
             print("epoch: ", epoch)
             print("Loss: ", L)
-            print("accuracy: ",(batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
+            print("accuracy: ",
+                  (batch_size - np.count_nonzero(np.argmax(label, axis=1) - np.argmax(x, axis=1))) / batch_size)
 
         # backpropagation
         grad = loss_function.backward()
@@ -95,7 +96,7 @@ for i in range(N_iter):
     label = np.eye(10)[test_label[i * batch_size:(i + 1) * batch_size]]
 
     # inference
-    x = conv1.forward_ori(input) # we use single thread to reduce distribution cost
+    x = conv1.forward_ori(input)  # we use single thread to reduce distribution cost
     x = relu1.forward(x)
     x = pool1.forward(x)
     x = x.reshape((batch_size, -1))  # Flattening the output for the fully connected layer
