@@ -25,7 +25,8 @@ class Conv():
             output[:, :, d2] += bias[d2]
         return output
 
-    def forward(self, input):
+    def forward_mt(self, input):
+        # we add a multi-thread version to process batch
         # Save the input for the backward calculation
         self.last_input = input
 
@@ -51,7 +52,7 @@ class Conv():
 
         return output
 
-    def forward_ori(self, input):
+    def forward(self, input):
         # start_time = time.time()
         # save the input for gradient calculation
         self.last_input = input
@@ -98,7 +99,7 @@ class Conv():
         # Padding input_gradient for convolution
         input_gradient_padded = np.pad(input_gradient, ((0, 0), (k1 - 1, k1 - 1), (k2 - 1, k2 - 1), (0, 0)),
                                        mode='constant')
-
+        # pad k1 -1 k2 -1
         # Initialize gradients
         self.weight_gradient = np.zeros_like(self.weights)
         self.bias_gradient = np.zeros_like(self.bias)
@@ -109,8 +110,10 @@ class Conv():
                 self.bias_gradient[d2] += np.sum(input_gradient[n, :, :, d2])
 
                 for d1 in range(D1):
+                    # dL / dW
                     self.weight_gradient[:, :, d1, d2] += convolve2d(self.last_input[n, :, :, d1],
                                                                      input_gradient[n, :, :, d2], mode='valid')
+                    # dL / dX
                     output_gradient[n, :, :, d1] += convolve2d(input_gradient_padded[n, :, :, d2],
                                                                np.rot90(self.weights[:, :, d1, d2], 2), mode='valid')
 

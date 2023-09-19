@@ -96,7 +96,7 @@ for i in range(N_iter):
     label = np.eye(10)[test_label[i * batch_size:(i + 1) * batch_size]]
 
     # inference
-    x = conv1.forward_ori(input)  # we use single thread to reduce distribution cost
+    x = conv1.forward(input)  # we use single thread to reduce distribution cost
     x = relu1.forward(x)
     x = pool1.forward(x)
     x = x.reshape((batch_size, -1))  # Flattening the output for the fully connected layer
