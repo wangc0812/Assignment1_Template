@@ -14,16 +14,13 @@ class CrossEntropy():
         # save input/label for gradient calculation
         self.last_input = input
         self.last_label = label
-
         # calculate crossentropy between input and label
         output = -np.sum(label * np.log(input)) / input.shape[0]
-
         return output
 
     def backward(self):
         # calculate gradient dL/dX
         output_gradient = -(self.last_label / self.last_input)
-
         # Normalize gradient across the batch
         output_gradient /= self.last_input.shape[0]
 
