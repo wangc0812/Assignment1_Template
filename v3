@@ -1,0 +1,861 @@
+%%
+%% This is file `sample-sigconf.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,sigconf')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+% \documentclass[sigconf]{acmart}
+\documentclass[sigconf,nonacm]{acmart}
+% \pagestyle{empty}
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+% \setcopyright{acmlicensed}
+% \copyrightyear{2018}
+% \acmYear{2018}
+% \acmDOI{XXXXXXX.XXXXXXX}
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+% \acmConference[Conference acronym 'XX]{Make sure to enter the correct
+%   conference title from your rights confirmation emai}{June 03--05,
+%   2018}{Woodstock, NY}
+% %%
+%%  Uncomment \acmBooktitle if the title of the proceedings is different
+%%  from ``Proceedings of ...''!
+%%
+%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%%  June 03--05, 2018, Woodstock, NY}
+% \acmISBN{978-1-4503-XXXX-X/18/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+% \usepackage{array}
+% \usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{soul}
+% \usepackage{textcomp}
+\usepackage{array}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{CIMSim: A Modular Simulator for Mixed-signal Compute-in-Memory based AI Accelerator}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+% \author{Ben Trovato}
+% \authornote{Both authors contributed equally to this research.}
+% \email{trovato@corporation.com}
+% \orcid{1234-5678-9012}
+% \author{G.K.M. Tobin}
+% \authornotemark[1]
+% \email{webmaster@marysville-ohio.com}
+% \affiliation{%
+%   \institution{Institute for Clarity in Documentation}
+%   \streetaddress{P.O. Box 1212}
+%   \city{Dublin}
+%   \state{Ohio}
+%   \country{USA}
+%   \postcode{43017-6221}
+% }
+
+% \author{Lars Th{\o}rv{\"a}ld}
+% \affiliation{%
+%   \institution{The Th{\o}rv{\"a}ld Group}
+%   \streetaddress{1 Th{\o}rv{\"a}ld Circle}
+%   \city{Hekla}
+%   \country{Iceland}}
+% \email{larst@affiliation.org}
+
+% \author{Valerie B\'eranger}
+% \affiliation{%
+%   \institution{Inria Paris-Rocquencourt}
+%   \city{Rocquencourt}
+%   \country{France}
+% }
+
+% \author{Aparna Patel}
+% \affiliation{%
+%  \institution{Rajiv Gandhi University}
+%  \streetaddress{Rono-Hills}
+%  \city{Doimukh}
+%  \state{Arunachal Pradesh}
+%  \country{India}}
+
+% \author{Huifen Chan}
+% \affiliation{%
+%   \institution{Tsinghua University}
+%   \streetaddress{30 Shuangqing Rd}
+%   \city{Haidian Qu}
+%   \state{Beijing Shi}
+%   \country{China}}
+
+% \author{Charles Palmer}
+% \affiliation{%
+%   \institution{Palmer Research Laboratories}
+%   \streetaddress{8600 Datapoint Drive}
+%   \city{San Antonio}
+%   \state{Texas}
+%   \country{USA}
+%   \postcode{78229}}
+% \email{cpalmer@prl.com}
+
+% \author{John Smith}
+% \affiliation{%
+%   \institution{The Th{\o}rv{\"a}ld Group}
+%   \streetaddress{1 Th{\o}rv{\"a}ld Circle}
+%   \city{Hekla}
+%   \country{Iceland}}
+% \email{jsmith@affiliation.org}
+
+% \author{Julius P. Kumquat}
+% \affiliation{%
+%   \institution{The Kumquat Consortium}
+%   \city{New York}
+%   \country{USA}}
+% \email{jpkumquat@consortium.net}
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+% \renewcommand{\shortauthors}{Trovato et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+This work introduces CIMSim, an open-source, pre-circuit simulator designed to help circuit designers evaluate early-stage chip-level software performance and hardware overhead of mixed-signal compute-in-memory(CIM) accelerators. CIMSim features a modular design, allowing easy multi-level co-design and design space exploration. Modularized from the state-of-the-art CIM simulator NeuroSIM, CIMSim provides a highly configurable simulation framework supporting multiple quantization algorithms, diverse circuit architecture designs, and different memory devices. The modular design enables CIMSim to be further extended to new designs effectively. 
+
+Currently, CIMSim offers several quantization algorithms, including I-Bert, dynamic fixed-point, WAGE, WAGEUBN， and LSQ, as well as three types of circuit architecture design: 2’complement-like, positive-negative split, and weight-shifted. CIMSim natively supports evaluating accelerators’ software and hardware performance for CNNs and Transformers in Python, leveraging the popular PyTorch and Hugging Face Transformers frameworks. These capabilities make CIMSim highly adaptive when simulating different networks. This work demonstrates that CIMSim can easily be combined with optimization strategies to perform design space exploration and be used for chip-level Transformers CIM accelerators evaluation. Also, CIMSim can achieve $4\times\sim9\times$ speedup of NeuroSim through a statistic-based average mode proposed by this work.
+
+\end{abstract}
+
+\keywords{Compute-in-memory, deep learning accelerator, pre-circuit simulator, open-source tool}
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+% \begin{CCSXML}
+% <ccs2012>
+%  <concept>
+%   <concept_id>00000000.0000000.0000000</concept_id>
+%   <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
+%   <concept_significance>500</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>00000000.00000000.00000000</concept_id>
+%   <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
+%   <concept_significance>300</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>00000000.00000000.00000000</concept_id>
+%   <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
+%   <concept_significance>100</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>00000000.00000000.00000000</concept_id>
+%   <concept_desc>Do Not Use This Code, Generate the Correct Terms for Your Paper</concept_desc>
+%   <concept_significance>100</concept_significance>
+%  </concept>
+% </ccs2012>
+% \end{CCSXML}
+
+% \ccsdesc[500]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+% \ccsdesc[300]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+% \ccsdesc{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+% \ccsdesc[100]{Do Not Use This Code~Generate the Correct Terms for Your Paper}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+
+%% A "teaser" image appears between the author and affiliation
+%% information and the body of the document, and typically spans the
+%% page.
+% \begin{teaserfigure}
+%   \includegraphics[width=\textwidth]{sampleteaser}
+%   \caption{Seattle Mariners at Spring Training, 2010.}
+%   \Description{Enjoying the baseball game from the third-base
+%   seats. Ichiro Suzuki preparing to bat.}
+%   \label{fig:teaser}
+% \end{teaserfigure}
+
+% \received{20 February 2007}
+% \received[revised]{12 March 2009}
+% \received[accepted]{5 June 2009}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+
+\section{Introduction}
+Deep neural networks (DNNs) have been pivotal in the development of artificial intelligence in recent years. Early on, CNN-based neural networks achieved significant breakthroughs in the field of computer vision\cite{lecun2015deep}. More recently, Transformer-based models have made remarkable strides\cite{Vaswani:Transformer,BERT,gpt4}. Nowadays, both CNNs and Transformers are scaling up in size for advanced performance. Besides the powerful model innovations, the explosion of DNNs also owes to the performance improvement of the hardware such as GPUs. However, the processors based on the traditional von Neuman architecture, such as GPUs, face throughput and energy efficiency limitations due to extensive data transfers between the processor unit and storage part. This 'memory wall' problem becomes more and more severe as the scale of model parameters increases. A shift toward memory-oriented architectures promises to break the 'memory wall' bottleneck. Compute-in-memory(CIM) architecture, which performs matrix multiplication within memory arrays, has demonstrated remarkable energy efficiency for deep learning applications \cite{yu2018neuro}. These architectures capitalize on in-place vector-matrix multiplication within memory crossbars, reducing energy demands and minimizing the need for data movement. Categorized into digital and mixed-signal CIM, the former one embeds digital logic into SRAM memory to perform multiply-and-accumulation(MAC) in the pure digital domain. The latter typically combines with advanced non-volatile memory devices to calculate in the analog domain, characterized by higher density and lower energy consumption than the former under the same technode. Impressive energy efficiencies have been reported for mixed-signal CIM acceleration of CNNs \cite{chi2016prime,AEPE,shafiee2016isaac} and Transformers\cite{yiranchen2020retransformer,sridharan2023x,lu2023rram}.
+
+As an emerging architecture, the design of CIM accelerators evolves rapidly and needs a cross-layer optimization of algorithms, architecture, circuits, and devices. Thus, a simulator for early-stage estimation and exploration is necessary before the timing- and resource-consuming deployment. There are bunch of simulator platforms \cite{dong2012nvsim,zhu2023mnsim,dnn+neurosim} have demonstrated powerful capability at system-level or circuit-level CIM accelerator performance evaluation, but they still have some limitations in terms of generality and flexibility. First, current mainstream CIM pre-circuit simulators (e.g., NeuroSim\cite{dnn+neurosim}, NVSim\cite{dong2012nvsim}) are focused on CNNs. Extending them to the Transformer needs elaborate and time-consuming work due to the tight coupling between the simulator's code structure and the network type. Second, hardware-software co-design techniques such as quantization is quite important in today’s AI accelerator design. While the quantization algorithm evolving fast, quickly apply them—whether they are hardware-specific or not—to CIM hardware is challenging in current simulators as they generally treat quantization algorithms as inherent properties. Third, current simulators are generally built upon certain architecture/circuit design, while supporting some level of flexibility by parameter tuning. Evaluating new designs or bench-marking across different designs using these simulators needs careful and tedious modification to avoid the deviation.
+
+To solve the above issues, we propose CIMSim, an open-source, pre-circuit, modularied simulator that can provide software and hardware performance estimation for mixed-signal CIM accelerators with different models. The CIMSim is available at GitHub (will be released upon acceptance) with main features summarized as follows:
+\begin{enumerate}
+    \item We based CIMSim on NeuroSim but unified the construction models of CNNs and Transformers through modular calculations. This allows CIMSim to support both without significant modifications. For user-friendliness, we used the popular deep learning framework PyTorch for model training and inference, as well as the widely-used Hugging Face Transformers library for Transformer-based research;
+    \item For software performance evaluation, we decoupled the modeling of algorithms (quantization), architecture (digit mapping), circuit (ADC) and device (precision, on/off ratio) from each other and provided several typical implementations for easy deployment. Our object-oriented code style enables hardware designers to explore the cross-layer design space and extend to new designs easily. 
+    \item To further improve the approach-ability of CIMSim, we transfer the architecture level hardware performance into object-oriented Python code. While python is chosen for easy development, its efficiency is much less than C++. Thus, a data statistic based average-mode is employed to replace the trace-based mode to reduce memory usage and runtime. 
+  
+\end{enumerate}
+
+\section{CIMSim Simulator} 
+CIMSim integrates the parameter quantization and CIM circuits' non-idealities into the Neural Network layers from \textit{Pytorch} library\cite{pytorch}, such as Convolution / Fully-connect layer, in a modularized manner. In this way, it is easy to plug into various neural networks to validate the software performance. Especially, for the Transformers part, to better integrate into the thriving Transformer-based open-source community, CIMSim actively embraces the \textit{Transformers} library\cite{HFtransformers} from HuggingFace. The corresponding hardware overhead is formulated with Python-wrapped circuit modules encapsulating the performance models from silicon validated \textit{DNN+NeuroSim V1.3}\cite{NeuroSimv1.3}. 
+
+
+\subsection{Software Performance Evaluation}
+\label{sec:accuracy}
+In the CIM accelerator design, low-precision fixed-point parameters are usually adopted due to the regular structure of the memory array. Also, due to the mixed-signal operations, there will be non-ideal effects, such as limited on/off ratio, cell variation, and ADC quantization loss, introduced in the calculation. All these hardware-specific parameters could degrade the software performance if poorly designed. Thus, we modularized the hardware-induced impact of CIM operation to support the combination of different algorithms, circuits, and devices. The modular modeling is shown in Fig.\ref{fig:accframe}.
+
+\begin{figure}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+\centering
+\includegraphics[width=3.4in]{figures/accuracy_framework.pdf}
+\caption{The accuracy evaluation framework}
+\label{fig:accframe}
+\vspace{-0.5cm}   
+\end{figure}
+
+\subsubsection{Quantizer}
+\label{sec:quant}
+\textbf{Quantizer} is used to quantize weight and input from high-precision floating-point(FP) into low-precision integers (INT) according to the quantization schemes. With an empirical observation, the hardware performance will be better with lower parameter precision. Therefore, quantization is always an important technique in the hardware/software co-design for the CIM accelerator. In CIMSim, the input/output data formats of the quantizer are fixed to FP/INT, thus decoupling it from the rest parts of the calculation. A corresponding dequantizer block is introduced at the end of the CIM operation to convert the INT calculation back to the FP representation. Different quantization schemes could be modified to fit into the quantizer/dequantizer module, supporting algorithm exploration despite the circuits and devices implementation. Based on the quantizer/dequantizer definition, CIMSim instantiates different quantization algorithms such as dynamic fixed-point(DF)\cite{df}, WAGE\cite{wage} and WAGEUBN\cite{wagev2} etc., as well as the advanced LSQ\cite{lsq} algorithms.
+
+\subsubsection{DigitConverter}
+\label{sec:DigitConverter}
+Unlike digital systems that typically embrace binary number systems, operations in CIM subarray are based on high-precision digit ($k$-bit) number systems to leverage their analog calculation nature. In other words, inputs could be converted to $2^k$ voltage levels by DACs [], while the weights could be encoded to different conductance values of $1-7$-bit [] based on the memory cells. While the operations could be high-precision, the INT outputs from the quantizer may not be directly mapped to the CIM operation as their precision ($N$-bit) could be higher than the operands ($k$-bit) supported by the hardware. Thus, we introduce the \textbf{DigitConverter} to convert the INT to the digit to cover different circuit and device choices. According to the circuit implementation, the conversion from INT to digits could be realized in different ways. In \cite{2compl2019isscc,2compl2020isscc}, the weight parameters are decomposed to digits using a 2'complement-like rule. \cite{chi2016prime,cheng2017time} split the weight parameters into positive and negative subarrays and thus decompose them into two groups of unsigned values. Unsigned decomposition could also be achieved by shifting the weight by a fixed value according to \cite{shafiee2016isaac}. The decomposed results will be combined by the INTConverter block through shift-and-add (and shift-back for the third representation) operation. While all the methods mentioned above for the weights could be applied for the input decomposition, binary digits are widely used to eliminate the hardware cost introduced by DACs. The output of DigitConverter could be directly applied in one CIM subarray operation, decoupling the CIM macro from the digital peripherals on-chip.
+
+\subsubsection{Digit2Cell and DAC}
+While CIM macro takes digits for MAC operation mathematically, the operands are encoded with imperfect analog signals due to the device's limitations. Thus, to mimic the real calculation in the CIM array, we introduce \textbf{Digit2Cell} leverage the imperfection into weight digits. Considering a memory cell with the maximum conductance $G_{max}$ and minimum conductance $G_{min}$, to encode the $k$-bit weight digit with memory cell's conductance, the conductance of each cell is divided into $2^k$. Thus, the cell conductance mapped by weight digit ${d_w^n}$ will be $G_n$ as below:
+\begin{equation}
+G_n = {d_w^n} \times \Delta G + G_{\text{min}}, \quad {d_w^n} \in [0, 2^k - 1], \quad \Delta G = \frac{G_{\text{max}} - G_{\text{min}}}{2^k - 1}
+\end{equation}
+We could see that the conductance is not linearly proportional to ${d_w^n}$ due to the $G_{min}$ term, introducing non-idealities into the CIM operation. In the Digit2Cell module, we normalize the conductance, generalize the weight digit presentations across different devices while maintain the non-idealities. Thus, weight digit ${d_w^n}$ involved in CIM crossbar's analog computation is changed into $d_{cell}$ as equation (\ref{eq:wcell}). In addition, our modeling also takes into account the cell variation by adding random noise to the normalized weight digit.
+
+\begin{align}
+\label{eq:wcell}
+ d_{cell} =\frac{G_n}{\Delta G} = {d_w^n} + \frac{G_{min}}{\Delta G} 
+\end{align}
+
+Similarly, we introduce the DAC block to convert the input digits to read voltage and normalize it back to integrate possible non-idealities. The normalization of Digit2Cell and DAC is inherent to the CIM operations by correspondingly picking references for the ADC. 
+
+\subsubsection{ADC}
+\textbf{ADC} converts the analog MAC results into digital signals. In this digitization process, the quantization loss introduced should be considered. A general process of ADC can be mathematically formulated as a piece-wise function that maps its input to corresponding centers based on configured edges. For $k-bit$ ADC, it can be represented as:
+\begin{align}
+\label{eq:adc}
+\text{f}(x) = 
+\begin{cases} 
+c_0 & \text{if } x < \text{ref}_0 \\
+c_i & \text{if } \text{ref}_{i-1} \leq x < \text{ref}_i, \text{ for } i = 1, \ldots, 2^k - 2 \\
+c_{2^k - 1} & \text{if } x \geq \text{ref}_{2^k - 2}
+\end{cases}
+\end{align}
+where $c_i$ represents the quantized value of each level, and $\text{ref}_i$ refers to the reference that defines the edges of each level in the ADC.
+
+The general process could represent any ADC by projecting $c_i$ and $\text{ref}_i$. CIMSim offers two general ADCs choices: linear and nonlinear. Linear ADCs has fixed step size between $c_{i-1}$ and $c_i$, while nonlinear ADCs determine their $c_i$ and $\text{ref}_i$ based on the statistical distribution of the data. To facilitate user operation, our modeling of ADC is based on (\ref{eq:adc}), which means the $c_i$ and $\text{ref}_i$ could be user defined. Thus, it offers great flexibility for users to test their own ADCs without being confined to the existing implementations.
+
+
+\subsection{Hardware Performance Evaluation}
+CIMSim offers the hardware performance evaluation based on a chip architecture similar to NeuroSim. Unlike NeuroSim, which focuses on evaluations of different devices and technology nodes, CIMSim is designed for easy implementation of a CIM accelerator with the combination of different algorithms, architecture, circuits, and devices. Thus, flexibility is one of the most important considerations for our implementation. CIMSim wrapped the circuit modules from NeuroSim and realized the chip-level hardware performance evaluation in an object-oriented and hierarchical manner with Python.  
+
+\begin{figure}
+\vspace{-0.4cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=3in]{figures/3stages.pdf}
+    \caption{Dataflow in multi-head attention block}
+    \label{fig:3stages}
+\vspace{-0.6cm}       
+\end{figure}
+
+\subsubsection{Chip Architecture}
+\label{sec:chiparch}
+CIMSim's default CIM hardware accelerator chip aims to accelerate the matrix multiplication in CNN and Transformer networks and it tends be used as a plug-in accelerator. CIMSim inherits the hierarchical structure from NeuroSIM, featuring a three-layer architecture consisting of Subarray (SA), Processing Engine (PE), and Tile, shown in the left-hand-side of Fig.\ref{fig:chip}. This architecture is designed to maximize data reuse for CNNs, but it may not always be efficient for different networks or structures. We have unified the definitions of SA, PE, and Tile, treating all the digital circuit modules as objects. This approach allows the chip to be assembled like LEGO, making it easy to modify for architecture optimization of different networks or to perform design space searches for specific tasks. 
+
+CIMSim original offers the hardware evaluation for CNN and Transformer. The CNN accelerator design is the similar to NeuroSim. For CIM accelerators aimed at accelerating transformers, the candidates for acceleration are multi-head attention (MHA) blocks(Fig\ref{fig:3stages}) and followed by feed-forward(FFN) blocks. These two consecutive blocks involve intensive matrix multiplication operations. Matrix multiplication can be categorized into static (SMM) and dynamic (DMM) based on whether it requires dynamic writing to the memory subarray. 
+
+\begin{figure}
+\vspace{-0.5cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.1cm}   %调整图片标题与图距离
+\centering
+\includegraphics[width=2.6in]{figures/chip_architcture.pdf}
+\caption{Transformer CIM accelerator chip architecture}
+\label{fig:chip}
+\vspace{-0.6cm} 
+\end{figure}
+
+Fig.\ref{fig:chip} shows the architecture of Transformer CIM accelerators, which heterogeneous tiles are employed on the chip. For the CIM accelerations, eNVM-based CIM tiles are adopted as the weights of SMM are well-trained NN parameters. For DMM in Transformers, SRAM-based CIM tiles are adopted since the weights are generated for each input on-the-fly. The right-hand-side of Fig.\ref{fig:chip} shows conceptual mapping strategy. The FFL blocks(consisting of intermediate and output layers), Stage1 and Stage 3 in MHA blocks(Fig\ref{fig:3stages}) are SMM, thus they are mapped to eNVM-based CIM tiles. The Stage2 in MHA block includes two DMM: $Matmul(\mathbf{Q}, \mathbf{K}^T)$ and $Matmul(\mathbf{P}, \mathbf{V})$. For $Matmul(\mathbf{Q}, \mathbf{K}^T)$, we choose to write each column of the $\mathbf{K}$ matrix into each column of the SRAM-based CIM array. Due to the characteristics of CIM computation, this transposition operation is naturally implemented so in this way. Then, for the computation of $Matmul(\mathbf{P}, \mathbf{V})$, it is feasible to write the $\mathbf{V}$ matrix into the SRAM-based CIM array while computing $\mathbf{P}$, thereby achieving higher parallelism. In this case, the latency generated by writing $\mathbf{V}$ can be hidden.
+
+
+
+
+
+% \subsubsection{Network mapping}
+
+% The mapping strategy of neurosim\cite{cmapping,nmapping} is adopt for the CNN layers. In the transformer-based network, different CIM tiles and thus mapping strategies are applied on different stages of the layer. The same strategies is also used in the FFL blocks and Stage 3 in MHA blocks of the transformer-based network since they consist of linear layers and work in sequential. Regarding the MHA block, a two-stage mapping strategy is utilized considering parallelism and dynamism. 
+
+
+
+% % transformer有关head相关的内容我感觉是属于实现的具体细节了，这里我省去了跟head有关的描述。只是简单说了一下这几个部分与CNN的不同之处（stage1的三个linear是并行的，stage2 哪个矩阵mapping到CIM, 以及stage2中的动态矩阵所使用的tile可以共用从而节省面积
+
+% As shown in Fig.\ref{fig:3stages}, Stage 1 has three linear layers, the input (hidden states) is fed into three separate linear layers to generate $\mathbf{Q}$, $\mathbf{K}$, and $\mathbf{V}$ independently. Thus, in the dataflow of our CIM accelerator, these linear layers are computed in parallel to improve the throughput. The weights of these linear layers will be mapped onto tiles on a chip in the same way as other SMM case.
+
+
+
+% Dynamism is a major characteristic of the Stage 2 in Fig.\ref{fig:3stages}. Specifically, the two operands for matrix multiplication are generated on-the-fly during inference and thus could not be pre-written into the CIM accelerator's subarray. Because CIM works in a weight stationary style, one of the operands need to be written to the CIM array for each operation. For $Matmul(\mathbf{Q}, \mathbf{K}^T)$, we choose to write each column of the $\mathbf{K}$ matrix into each column of the CIM array. Due to the characteristics of CIM computation, this transposition operation is naturally implemented. Then, for the computation of $Matmul(\mathbf{P}, \mathbf{V})$, it is feasible to write the $\mathbf{V}$ matrix into the CIM array while computing $\mathbf{P}$, thereby achieving higher parallelism. In this case, the latency generated by writing $\mathbf{V}$ can be hidden. It is worth mentioning here that, in Transformers, since the weights of each SMM need to be pre-programmed into different eNVM-based CIM tiles, a large amount of tiles are usually required to store all the  trained weights in the network. In contrast, the operands for DMM are written on-the-fly, allowing DMM operations in different MHA blocks to share these SRAM-based CIM tiles, thereby saving a significant amount of area.
+
+
+% The specific mapping process to CIM can be visualized in Fig.\ref{fig:stage2}.
+
+% \begin{figure}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+% % \setlength{\abovecaptionskip}{-0.01cm}   %调整图片标题与图距离
+%     \centering
+%     \includegraphics[width=3in]{figures/matmulmapping_new.pdf}
+%     \caption{Mapping of stage 2 in MHA block}
+%     \label{fig:stage2}
+% \vspace{-0.6cm}   
+% \end{figure}
+
+
+\subsubsection{Average Data Mode}
+\label{sec:average}
+% data pattern决定了energy&latency。trace的好处是使用了real traced data，准确捕获weight/input的data pattern。在这里data pattern 主要体现在input vectror的非零比、subarray中cell conducatance的大小。 trace mode需要遍历所有的input vector。average mode 采用了平均非零比来表示input data pattern、平均电导来表示 weight data pattern。这样做的好处是对于每一个subarray来说，只需要处理一个vector就可以scale出所有的vectors结果。然后讲一下，因为subarray的利用率不一定是100%，对于没有填满的，我们需要动态求一个mask来表示没有填满的data pattern从而得到正确结果。Thus, in the orgin version of CIMSim, we need to iterate through all subarrays.为了充分利用 average data of conductance所带来的好处, 我们develop the speedup version of CIMSim。考虑到这么写有两个原因：如果把subarry scale的方法放在实验部分写，可能会让读者产生疑问：采用average weight的目的只是因为减少中间文件大小以及参数传递吗？所以我觉得把speedup的方法放到这边，一方面input average可以减少subarry处理Input vector的数目，另一方面,weight average可以在一定条件下帮我们减少所需计算subarray的数目。并且，放在这边就不会显得我们speedup并不是实验效果不好才加上的
+
+
+Energy consumption and latency are determined by the data pattern of the weight/input involved in the computation, so one important property of NeuroSIM for accurate hardware overhead estimation is the trace mode, which calculates the latency and energy consumption based on the real data involved in the calculation. NeuroSIM dumps out the real-traced weight/input values during the inference to captures the data patterns of the activation and weights. However, this requires high runtime and memory usage during the simulation, especially for larger models like Transformers. To address this, we propose the average mode, which uses average data of the weight/input instead of the entire trace data. 
+
+
+Fig.\ref{fig:averagemode_workflow} conceptually illustrates the average mode and its difference from the trace mode. $\alpha$ is introduced to represent the ratio of non-zero elements in the input vector. As shown in Fig.\ref{fig:averagemode_workflow}, the data pattern of input and weight is specifically reflected in the $\alpha$ of each input vector and the memory cell conductance representing the weight in the subarray. For a subarray, the trace mode needs to process all $n$ input vectors and accumulate the results to obtain the latency and energy introduced by this subarray.
+
+Unlike trace mode, the average data processed in average mode is obtained during inference with statistical methods. Specifically, we generate a set of average data for each layer in the network to represent the input/weight data pattern of that layer: $\alpha_{avg}$ is the average ratio of non-zero elements in the inputs of that layer, and $G_{avg}$ is used to represent the average conductance of the weights in all subarrays of that layer. In this way,for each subarray, processing a single input vector and then scaling the result by $n$ to get the results corresponding to all input vectors. For CNNs, it is very common that the utilization of all subarrays is not completely 100\%. Fig.\ref{fig:averagemode_workflow} also shows an example of using average mode to handle partially filled subarrays. Since we use $G_{avg}$ to represent the average conductance of weights in all subarrays of a layer, we need to dynamically calculate a mask based on the actual size of the filled weights to represent the data pattern in the case of partial fills. Thus, in the original version of CIMSim, denoted as CIMSim (origin), it is necessary to traverse all subarrays to obtain accurate results, similar to trace mode. 
+
+\begin{figure}
+\vspace{-0.8cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=2.7in]{figures/averagemode.pdf}
+    \caption{Comparison of average mode and trace mode workflows}
+    \label{fig:averagemode_workflow}
+\vspace{-1.0cm}       
+\end{figure}
+
+
+To fully leverage the benefits of the average data of conductance, we developed an enhanced version of CIMSim, referred to as CIMSim (speedup). In the original CIMSim (origin), the main reason for iterating through all subarrays is that memory utilization can vary, necessitating the dynamic calculation of masks. However, for layers with $100\%$ memory utilization (where all subarrays are filled), the need to calculate masks has been eliminated. The estimation can be sped up by using the overhead of one subarray to scale the total overhead for all subarrays in that layer without accuracy drop.
+
+The improvement we have made here is to deploy the average mode to replace the current trace mode, which not only caputre the input/weght data pattern to get accurate result, but also greatly reduces memory usage and runtime. Additionally, while trace mode generates large trace data files, average mode only produces lightweight average data files. 
+
+
+\section{Experiment Results}
+In this section, we first validated the usability of the average mode and demonstrated its acceleration capabilities. Then, we conducted a design space exploration using CIMSim to showcase the benefits of our modular approach. Finally, we studied transformer-based models, showing that CIMSim can effectively serve as a tool to research CIM accelerator for Transformers.
+
+\subsection{Average mode Versus Trace mode}
+\subsubsection{Performance}
+As discussed in section 3.3.2, we adopt an average mode based on the data statistics to mimic the trace mode of NeuroSIM while improving the calculation efficiency. It is worth noticing that the data pattern will not impact the chip area evaluation but the read latency and dynamic energy of the subarray. To validate the performance of the average mode, we evaluate hardware overhead with the same chip configuration for the two modes. Table \ref{tab:avg_networks} compares the throughput and energy effect for different networks between the average mode and the trace mode. It can be seen in Table \ref{tab:avg_networks} that our average mode has a minimal impact on throughput compared to the trace mode, with less than $10\%$ differences in energy consumption. 
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Index} & \textbf{Mode} & \textbf{VGG8} & \textbf{ResNet18} & \textbf{DenseNet40} \\
+\hline
+\multirow{2}{*}{\shortstack{Energy Efficiency \\ (TOPS/W)}} & Trace & 10.01 & 5.62 & 6.22 \\
+ & Average & 9.27 & 5.19 & 5.67 \\
+\hline
+\multirow{2}{*}{\shortstack{Throughput (TOPS)}} & Trace & 1.54 & 0.46 & 0.11 \\
+ & Average & 1.54 & 0.46 & 0.11 \\
+\hline
+\end{tabular}
+\caption{Comparsion of average and trace mode among various netwrok}
+\label{tab:avg_networks}
+\vspace{-1cm} 
+\end{table}
+
+% It can be seen in Table \ref{tab:avg_networks} that our average mode has a minimal impact on throughput compared to the trace mode, with around ~(percentage) differences in energy consumption. These differences are mainly due to the uneven distribution between weights and inputs, which is typically nonlinear, causing some outliers when using the average mode. However, from the evaluation, the deviations caused by outliers across different networks are similar. Thus, we identified an empirical calibration factor, $\alpha=0.91$, to effectively narrow the error of the average mode. Average($\alpha$) refers to the average mode result with the calibration factor $\alpha$.
+% We can see that the calibration factor is effective across different networks.
+
+% \begin{table}[h]
+% \centering
+% \small
+% \begin{tabular}{|c|c|c|c|c|}
+% \hline
+% \textbf{Index} & \textbf{Mode} & \textbf{VGG8} & \textbf{ResNet18} & \textbf{DenseNet40} \\
+% \hline
+% \multirow{3}{*}{\shortstack{Energy Efficiency \\ (TOPS/W)}} & Trace & 10.01 & 5.62 & 6.22 \\
+%  & Average & 9.27 & 5.19 & 5.67 \\
+%  & \shortstack{Average($\alpha$)} & 10.08 & 5.64 & 6.07 \\
+% \hline
+% \multirow{2}{*}{\shortstack{Throughput (TOPS)}} & Trace & 1.54 & 0.46 & 0.11 \\
+%  & Average & 1.54 & 0.46 & 0.11 \\
+% \hline
+% \end{tabular}
+% \caption{Comparsion of average and trace mode among various netwrok}
+% \label{tab:avg_networks}
+% \vspace{-1cm} 
+% \end{table}
+
+\subsubsection{Runtime}
+Fig.\ref{fig:runtime} shows the runtime comparison between CIMSim and NeuroSim for hardware performance evaluation. The definitions of CIMSim(origin) and CIMSim(speedup) in Fig.\ref{fig:runtime} are described in Section \ref{sec:average}. The average mode in CIMSim(origin) has less computational load than the trace mode in principal because CIMSim(origin) only needs to calculate the overhead for one input vector to estimate all inputs. However, since the CIMSim is built in Python for architecture-level performance evaluation, the loop through different subarrays is much slower than the C++ loop in NeuroSim for VGG8. As a result, the evaluation of VGG8 in CIMSim is slower than that of NeuroSIM in VGG8 case.
+
+\begin{figure}
+\vspace{-0.8cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.1cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=2.7in]{figures/Experiment1-E1F3.pdf}
+    \caption{Runtime comparsion between NeuroSim and CIMSim}
+    \label{fig:runtime}
+\vspace{-0.5cm}    
+\end{figure}
+
+However, with the speedup technique in CIMSim(speedup), CIMSim improves the estimation of the CNNs up to $9$ times faster than NeuroSim despite the slower programming language, as shown in Fig.\ref{fig:runtime}. For Transformer performance estimation, because the layers' sizes are relatively fixed, each layer's memory utilization always reaches $100\%$ with our heterogeneous tile CIM accelerator architecture. In other words, the speedup techniques could be applied to all layers, which makes the runtime required for estimating Transformer CIM accelerators very short. For example, estimating a 12-Bertlayer BERT(base) model with CIMSim(speedup) takes only $3.08$ seconds, which is much more short than the CNNs in Fig.\ref{fig:runtime}. Therefore, in the current version of CIMSim, we have adopted the methods from CIMSim (speedup), because it is particularly suitable for Transformer simulations and reduce the runtime of CNNs.
+
+
+\subsection{Design space exploration using CIMSim}
+CIMSim supports cross-layer design space exploration of algorithms (quantization method and precision), architectures (digit mapping), circuits (ADC), and devices (cell precision, on/off ratios). The decoupled and modularized modeling of these elements makes it easy to configure different designs or extend to new designs. This section conceptually demonstrates the design space exploration using CIMSim for a CNN inference accelerator. For simplicity, we adopt a greedy algorithm for space searching. 
+
+\subsubsection{Algorithm level}
+CIMSim supports both post-training quantization(PTQ) and quantization-aware training(QAT) of different algorithms in-situ. In this stage, INT output will directly be used for matrix multiplication without introducing any architecture/circuit/ device effect. Thus, the only impact factor on the software performance will be quantization. As we mentioned in Section \ref{sec:quant}, we search for the lowest precision achievable by a quantization method under the required accuracy. This work explores three QAT algorithms for CNN: WAGE, DF, and LSQ, on two CNN networks, VGG8 for Cifar10\cite{cifar10} and ResNet18 for ImageNet(Subset)\cite{imagenet}. Table \ref{tab:quantization} shows the minimum parameter needed for each network under different quantization algorithms. The quantization precision for activations and weights is consistent, considering the simplicity of demonstration, but it could be different in real practice to improve the performance further.  
+% table 里加bits，宽度一致
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Quantization} & \textbf{WAGE} & \textbf{LSQ} & \textbf{DF} \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Minimum parameter}} \\
+\hline
+VGG8 (CIFAR10) & 3-bit & 3-bit & 4-bit \\
+\hline
+ResNet18 (ImageNet) & 7-bit & 4-bit & 5-bit  \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Hardware perforamcne}} \\
+\hline
+\multicolumn{4}{|c|}{VGG8 on Cifar10} \\
+\hline
+Area (mm\(^2\)) & {33.56} & {33.56
+}& {41.01} \\
+\hline
+Energy Efficiency (TOPS/W) & {36.57} & {33.34} & {32.93} \\ 
+\hline
+Throughput (TOPS) & {2.54} & {2.54} & {2.27} \\
+\hline
+\multicolumn{4}{|c|}{ResNet18 on Imagenet} \\ 
+\hline
+Area (mm\(^2\)) &{147.04} & {96.13} & {115.24} \\
+\hline
+Energy Efficiency (TOPS/W) & {4.08} & {18.57} & {12.39} \\ 
+\hline
+Throughput (TOPS) & {0.24} & {0.37} & {0.29} \\
+\hline
+\end{tabular}
+\caption{minimum parameters and their performance comparison among different quantization method}
+\label{tab:quantization}
+\vspace{-0.8cm} 
+\end{table}
+
+% \begin{table}[h]
+% \centering
+% \begin{tabular}{|C{3cm}|C{1cm}|C{1cm}|C{1cm}|}
+% \hline
+% \textbf{Network} & \textbf{WAGE} & \textbf{LSQ} & \textbf{DF} \\
+% \hline
+% VGG8 (CIFAR10) & 3-bit & 3-bit & 4-bit \\
+% \hline
+% ResNet18 (ImageNet) & 7-bit & 4-bit & 5-bit  \\
+% \hline
+% \end{tabular}
+% \caption{minimum parameter among different quantization method}
+% \label{tab:quantization}
+% \vspace{-0.8cm} 
+% \end{table}
+
+Considering a unified hardware configuration but parameter precision that satisfies all the quantization optimization, the hardware performance is shown in Table \ref{tab:quantization}. In conclusion, the WAGE with $3$-bit precision achieved the best hardware performance for VGG8. Among the three quantization methods, $4$-bit DF shows the worse hardware performance due to a higher parameter precision. WAGE and LSQ have the same area and similar throughput since they can both achieve $3$-bit. However, the energy efficiency of LSQ is lower than that of WAGE, primarily because different quantization algorithms differ in the data distribution of weights and inputs, thereby affecting energy consumption. For ResNet18, LSQ, requiring lowest input and weight precision, performs best in all metrics. Therefore, in the following process, we fixed the quantization method to $3$-bit WAGE for VGG8 and $4$-bit LSQ for ResNet18.
+
+% \begin{figure}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+% \setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+%     \centering
+%     \includegraphics[width=3.4in]{figures/Experiment2-E2F1.pdf}
+%     \caption{hardware performance among different quantization}
+%     \label{fig:different_quant}
+%     \vspace{-0.5cm} 
+% \end{figure}
+
+\subsubsection{Architecture and Circuit level}
+\label{sec:adc}
+As discussed in Section \ref{sec:DigitConverter}, CIMSim supports designs with different architectures for digit mapping, which not only affect software performance but also impact the hardware performance of the chip. For simplicity, we refer to the three circuit architectures from Section \ref{sec:DigitConverter} as Design1 (2’complement-like), Design2 (positive-negative split), and Design3 (weight shifted). ADC and memory cell precision are also considered while exploring architecture as they are highly coupled. However, an infinite On/off ratio is assumed to eliminate the impact of a certain memory cell. Generally, we prefer lower ADC precision for better hardware performance\cite{shimeng2021review} [][]. Fig.\ref{fig:adc_acc} shows the software performance across different settings. For both VGG8 and ResNet18, it can be seen that Design2 always requires the lowest ADC precision compared to the other two options, while Design3 performed the worst, needing higher precision ADC in all cases. Design1's ADC precision requirement is similar to Design2 when the cell precision is low but increases with the cell precision. 
+
+% \begin{figure*}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+% \setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+%     \centering
+%     \includegraphics[width=1\linewidth]{figures/Experiment2-E2F23.pdf}
+%     \caption{Accuracy Performance with different ADC precision under different circuit architcure design}
+%     \label{fig:adc}
+%     \vspace{-0.2cm} 
+% \end{figure*}
+
+\begin{figure}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=3.4in]{figures/Experiment2-E2F2-.pdf}
+    \caption{Accuracy Performance with different ADC precision under different circuit architecture design}
+    \label{fig:adc_acc}
+    \vspace{-0.5cm} 
+\end{figure}
+
+\begin{figure}
+% \vspace{-0.4cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=3.5in]{figures/Experiment2-E2F3--.pdf}
+    \caption{Hardware performance among different circuit architecture design }
+    \label{fig:adc_per}
+    \vspace{-0.6cm} 
+\end{figure}
+
+% \begin{table}[h]
+% \centering
+% \begin{tabular}{|c|c|c|c|}
+% \hline
+% \textbf{VGG8} & {cell bit = 1} & {cell bit = 2} & {cell bit = 4} \\
+% \hline
+% Design1 & 4 & 5 & 6 \\
+% \hline
+% Design2 & 3 & 3 & 3 \\
+% \hline
+% Design3 & 6 & 6 & 6 \\
+% \hline
+% \end{tabular}
+% \caption{ADC Precision Requirements for Different Design}
+% \label{tab:adc_precision}
+% \end{table}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=3.3in]{figures/adc_per.pdf}
+%     \caption{Hardware Performance under different circuit architcure design}
+%     \label{fig:circuithardware}
+% \end{figure}
+
+To evaluate the hardware performance, we finalized the ADC precision settings for different cases from Fig.\ref{fig:adc_acc}, under a $3\%$ accuracy degradation tolerance. We assume an RRAM cell with Ron/Roff = 6k/900k\cite{rram150} (Fig.\ref{fig:adc_per}). We can see that when cell precision is $1$, Design2 has the largest area overhead. This is because Design2 uses a pair of subarrays to store signed weights, while the other two only need a single array. However, despite having subarray pairs, the area of Design2 is not double that of Design1 and Design3, thanks to the area saving by the low precision ADCs. As cell precision increases to $4$ bits, the area of Design2 even becomes smaller than Design1. Except for the ADC precision difference, Design1 lags in high cell precision because of the need to store the sign bit separately. It is interesting to see that, despite having higher ADC precision, Design3 achieves the smallest area when cell precision is $4$. Compared to the subarray pair needed by Design2 or the extra sign bit introduced by Design1, Design3 represents sign weights at the cost of dummy columns, which introduce a much smaller area overhead. Due to Design2's property to tolerate more aggressive ADC precision reduction at higher cell precision, Design2 achieves significantly higher energy efficiency and throughput when the cell bit is $4$. Since energy efficiency is usually the first priority in the CIM design, we chose Design2 at the architecture level with a circuit design of $3$-bit ADC for VGG8 and $5$-bit for ResNet18, despite the area cost.
+
+% \begin{table}[h!]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|}
+% \hline
+% \multirow{2}*{\textbf{Device}} & \textbf{RRAM}  & \textbf{RRAM} & \textbf{RRAM} & \textbf{FeFET} & \textbf{PCM} \\
+
+% &\cite{rram150} &{\cite{jain201913}} & {\cite{wu2018methodology}} & {\cite{ni2018fefet}} & {\cite{kim2019PCM}} \\
+% \hline
+% Ron & 6k & 6k & 100k & 240k & 40k \\
+% \hline
+% Roff & 900k & 100k & 1000k & 2400k & 500k \\
+% \hline
+% On/Off & 150 & 17 & 10 & 100 & 12.5 \\
+% \hline
+% \end{tabular}
+% \caption{Memory Cell Candidates}
+% \label{tab:memory_candidates}
+% \vspace{-0.9cm} 
+% \end{table}
+
+\begin{table*}
+\centering
+\small
+\begin{tabular}{|c| c|c|c | c|c|c | c|c|c | c|c|c | c|c|c|}
+\hline
+\textbf{Device} & \multicolumn{3}{c|}{\textbf{RRAM\cite{rram150}}} & \multicolumn{3}{c|}{\textbf{RRAM\cite{jain201913}}} & \multicolumn{3}{c|}{\textbf{RRAM\cite{wu2018methodology}}} & \multicolumn{3}{c|}{\textbf{FeFET\cite{ni2018fefet}}} & \multicolumn{3}{c|}{\textbf{PCM\cite{kim2019PCM}}} \\
+\hline
+Ron & \multicolumn{3}{c|}{6k} & \multicolumn{3}{c|}{6k} & \multicolumn{3}{c|}{100k} & \multicolumn{3}{c|}{240k} & \multicolumn{3}{c|}{40k} \\
+
+\hline
+
+On/Off & \multicolumn{3}{c|}{150} & \multicolumn{3}{c|}{17} & \multicolumn{3}{c|}{10} & \multicolumn{3}{c|}{100} & \multicolumn{3}{c|}{12.5}\\
+\hline
+Cell precision  & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 \\
+\hline
+{VGG8, baseline:90\%}
+& 90\% & 89\% & 89\% 
+& 88\% & 86\% & 10\% 
+& 88\% & 75\% & 10\%
+& 90\% & 89\% & 88\% 
+& 89\% & 82\% & 10\% \\
+\hline
+{ResNet18, baseline:80\%} 
+& 81\% & 81\% & 78\% 
+& 81\% & 81\% & 14\% 
+& 81\% & 81\% & 3\% 
+& 81\% & 81\% & 78\% 
+& 81\% & 81\% & 2\% \\
+\hline
+\end{tabular}
+\caption{Software Performance among different devices}
+\label{tab:device—acc}
+\vspace{-0.5cm} 
+\end{table*}
+
+
+\subsubsection{Device level}
+\label{sec:final}
+With the accelerator configured from the previous step, we explore some device candidates listed in Table \ref{tab:device—acc}.To recapitulate, VGG8 adopts 3-bits input/weights quantized by WAGE while ResNet18 adopts 4-bit input/weights quantized by LSQ. Both employ the architecture based on Design2, with ADC of $3$-bit and $5$-bit respectively. Table \ref{tab:device—acc} shows that with a $3\%$ accuracy drop tolerance, only RRAM\cite{rram150} and FeFET\cite{ni2018fefet} can maintain accuracy at $4$-bit precision. The remaining memory cells can only maintain accuracy at lower bit due to the limited on/off ratio. The hardware performance under each memory cell with a precision satisfying accuracy requirement is shown in Fig.\ref{fig:deviceperformance}. We can see that the FeFET\cite{ni2018fefet} with 4-bit precision achieved the highest energy efficiency for these two networks.
+
+
+
+% \begin{table*}[h]
+% \centering
+% \small
+% \label{tab:performance}
+% \begin{tabular}{|c| c c c | c c c |c c c|c c c|c c c|}
+% \hline
+% \textbf{Device} & \multicolumn{3}{c|}{\textbf{RRAM\cite{rram150}}} & \multicolumn{3}{c|}{\textbf{RRAM\cite{jain201913}}} & \multicolumn{3}{c|}{\textbf{RRAM\cite{wu2018methodology}}} & \multicolumn{3}{c|}{\textbf{FeFET\cite{ni2018fefet}}} & \multicolumn{3}{c|}{\textbf{PCM\cite{kim2019PCM}}} \\
+% \hline
+% Ron & \multicolumn{3}{c|}{6k} & \multicolumn{3}{c|}{6k} & \multicolumn{3}{c|}{100k} & \multicolumn{3}{c|}{240k} & \multicolumn{3}{c|}{40k} \\
+
+% \hline
+
+% On/Off & \multicolumn{3}{c|}{150} & \multicolumn{3}{c|}{17} & \multicolumn{3}{c|}{10} & \multicolumn{3}{c|}{100} & \multicolumn{3}{c|}{12.5}\\
+% \hline
+
+% \multicolumn{16}{|c|}{\textbf{Software Performance}} \\
+% \hline
+% Cell precision  & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 & 1 & 2 & 4 \\
+% \hline
+% {VGG8, baseline:90\%}
+% & 90\% & 89\% & 89\% 
+% & 88\% & 86\% & 10\% 
+% & 88\% & 75\% & 10\%
+% & 90\% & 89\% & 88\% 
+% & 89\% & 82\% & 10\% \\
+% % \hline
+% {ResNet18, baseline:80\%} 
+% & 81\% & 81\% & 78\% 
+% & 81\% & 81\% & 14\% 
+% & 81\% & 81\% & 3\% 
+% & 81\% & 81\% & 78\% 
+% & 81\% & 81\% & 2\% \\
+% \hline
+% \multicolumn{16}{|c|}{\textbf{Hardware Performance}} \\
+% \hline
+% \multicolumn{16}{|c|}{VGG8, 3-bit ADC, 3-bit WAGE, Design2} \\
+% \hline
+% Area (mm\(^2\)) & \multicolumn{3}{c|}{23.099} & \multicolumn{3}{c|}{39.095} & \multicolumn{3}{c|}{39.095} & \multicolumn{3}{c|}{23.099} & \multicolumn{3}{c|}{39.095} \\
+% Energy Efficiency (TOPS/W) & \multicolumn{3}{c|}{104.334} & \multicolumn{3}{c|}{39.897} & \multicolumn{3}{c|}{66.605} & \multicolumn{3}{c|}{125.041} & \multicolumn{3}{c|}{62.539} \\
+% Throughput (TOPS) & \multicolumn{3}{c|}{3.932} & \multicolumn{3}{c|}{2.528} & \multicolumn{3}{c|}{2.665} & \multicolumn{3}{c|}{3.912} & \multicolumn{3}{c|}{2.652} \\
+% \hline
+% \multicolumn{16}{|c|}{ResNet18, 5-bit ADC, 4-bit LSQ, Design2} \\
+% \hline
+% Area (mm\(^2\)) & \multicolumn{3}{c|}{68.167} & \multicolumn{3}{c|}{91.595} & \multicolumn{3}{c|}{91.595} & \multicolumn{3}{c|}{68.167} & \multicolumn{3}{c|}{91.595} \\
+% Energy Efficiency (TOPS/W) & \multicolumn{3}{c|}{38.152} & \multicolumn{3}{c|}{24.093} & \multicolumn{3}{c|}{28.487} & \multicolumn{3}{c|}{40.741} & \multicolumn{3}{c|}{27.971}\\
+% Throughput (TOPS) & \multicolumn{3}{c|}{0.552} & \multicolumn{3}{c|}{0.478} & \multicolumn{3}{c|}{0.484} & \multicolumn{3}{c|}{0.549} & \multicolumn{3}{c|}{0.484} \\
+% \hline
+% \end{tabular}
+% \caption{Performance and Accuracy Comparison}
+% \vspace{-0.5cm} 
+% \end{table*}
+
+
+% \begin{figure}
+% % \vspace{-0.4cm}  %调整图片与上文的垂直距离
+% \setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+%     \centering
+%     \includegraphics[width=3.4in]{figures/Experiment2-E2F4.pdf}
+%     \caption{Accuracy under different candidate memory cell}
+%     \label{fig:deviceacc}
+%     \vspace{-0.5cm} 
+% \end{figure}
+
+ 
+\begin{figure}
+\vspace{-0.07cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.01cm}   %调整图片标题与图距离
+    \centering
+    \includegraphics[width=2.8in]{figures/Experiment2-E2F5-2.pdf}
+    \caption{Hardware performance under different candidate memory cell}
+    \label{fig:deviceperformance}
+    \vspace{-0.8cm} 
+\end{figure}
+
+\subsubsection{Discussion}
+The above experiments demonstrate a conceptual process for design space exploration using CIMSim. It could be seen that while the CIMSim decouples the design space into different levels for easy configuration and extension, each sub-level is highly coupled with the others in determining the final software/hardware performance. Thus, we did not explore the design space strictly sequentially for each sub-level. However, the hardware design choices obtained in Section \ref{sec:final} could still be sub-optimal. Due to the simplicity of configuring CIMSim and the short run time, CIMSim could also be integrated into search algorithms such as genetic algorithms or simulated annealing.
+
+\subsection{Evaluation of Transformers}
+% 这一部分的逻辑： 首先说我们CIMSim具有accuracy evulation的功能，体现在我们在找参数的时候：design1需要dummy column, 以及各个ADC precision。 然后我们跑出了一个总的结果，我们大概说一下总的结果：例如desin1的能效好，desin3的面积，吞吐量高。（这部分之前是有点直接去解释，但是我觉得我可以把breakdown画出来，然后使得解释更具有说服力） 然后写我们跑了breakdown，然后根据breakdown的结果来解释table中的结果为什么是这样。 这部分实验的目的是为了说我们的CIMSim可以跑transformer的精度，并且可以得到chip-level transformer accelerator的结果。
+
+In this section, we demonstrate the evaluation of the software and hardware performance of the CIM-based accelerator of Transformers using CIMSim. The BERT (base) model is fine-tuned on the SST-2 task from the GLUE dataset. All weights and inputs of the model are quantized to $8$-bit by the QAT method from the I-BERT method. A baseline accuracy of ($90.02\%$) is achieved under the quantization. An RRAM with Ron/Roff = 6k/900k with 2-bit per cell\cite{rram150} is assumed for hardware performance evaluation. The other evaluation settings and results are summaried in Table \ref{tab:transper}. We can see that Design2 needs the least precision, while the ADC requirement of Design3 is strict. This trend is consistent with the conclusions in Section \ref{sec:adc}, even though the application model has shifted from CNNs to Transformers. Under these settings, we can see that Design2 has the largest area but achieved the best energy efficiency. In terms of throughput, Design3 achieved the highest throughput, while Design2 achieved the lowest of this term. 
+
+\begin{table}[ht]
+    \centering
+    \small
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Technology node} & \multicolumn{3}{c|}{22nm} \\
+        \hline
+        \multirow{2}*{\textbf{Subarray Size}} & \multicolumn{3}{c|}{64 x 64 SRAM subarray (DMM)} \\
+        & \multicolumn{3}{c|}{128 x 128 RRAM subarray (SMM)} \\
+        % \hline
+        % \multirow{2}*{\textbf{NVM Device}} & \multicolumn{3}{c|}{$R_{on} = 6k\Omega$, On/Off = 150} \\ &\multicolumn{3}{c|}{$2$-bit precision} \\
+        \hline
+        \textbf{Memory utilization} & \multicolumn{3}{c|}{100\%} \\
+        \hline
+        \textbf{Circuit architecture} & Design 1 & Design 2 & Design 3 \\
+        \hline
+        \textbf{SAR-ADC precision} & 8 & 7 & 9 \\
+        \hline
+        \textbf{Area (mm\(^2\))} & {147.565} & {204.878} & {122.452} \\
+        \hline
+        \textbf{Energy efficiency (TOPS/W)} & {4.163} & {4.554} & {3.658} \\
+        \hline
+        \textbf{Throughput (TOPS)} & {0.126} & {0.116} & {0.135} \\
+        \hline
+        \textbf{Compute efficiency (TOPS/mm\(^2\))} & {0.000855} & {0.000564} & {0.001102} \\
+        \hline
+    \end{tabular}
+
+    \caption{Benchmark results of CIM accelerator chips for Bert among different circuit archicture}
+    \label{tab:transper}
+    \vspace{-0.6cm} 
+\end{table}
+
+\begin{figure}
+    \centering
+    \vspace{-0.4cm}  %调整图片与上文的垂直距离
+\setlength{\abovecaptionskip}{-0.05cm}   %调整图片标题与图距离
+\includegraphics[width=3.6in]{figures/Experiment3-E3F3.pdf}
+    \caption{Breakdown of overhead}
+    \label{fig:breakdown}
+    \vspace{-0.5cm} 
+\end{figure}
+
+Fig.\ref{fig:breakdown} provides a breakdown of the overhead among these three designs. we can observe that the proportions of overhead for various parts (subarray, buffer, interconnect network (IC)) on the chip are similar across different design choices. Specifically, the subarray contributes to the majority of the area and energy overhead, while the internal data movement within the chip results in IC being the primary source of latency overhead. When it comes to the different designs, the underlying reason of their area and energy footprint difference is consistent with the analysis in lower cell precision case in Section \ref{sec:adc}. The lower ADC precision did not help Design2 achieve the best throughput because the IC take the largest account the latency. Due to the larger area requiring longer distances to transfer data, the trend of IC latency among these three designs is consistent with their area. Thus, Design3 with the smallest area can reach the highest throughput, while the largest Design2 get the lowest throughput.
+
+
+\section{Conclusion}
+In this work, we present CIMSim, a full-stack simulator designed to evaluate the software performance and hardware overhead of CIM accelerators for CNNs and Transformers. With its modular design, support for multiple quantization algorithms, and various circuit architecture designs, CIMSim effectively performs design space exploration (DSE) and integrates easily with optimization strategies. Additionally, CIMSim can be used for chip-level CIM accelerators for Transformers.
+%%
+%% The acknowledgments section is defined using the "acks" environment
+%% (and NOT an unnumbered section). This ensures the proper
+%% identification of the section in the article metadata, and the
+%% consistent spelling of the heading.
+
+% \begin{acks}
+% To Robert, for the bagels and explaining CMYK and color spaces.
+% \end{acks}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{CIM_ref}
+
+
+%%
+%% If your work has an appendix, this is the place to put it.
+% \appendix
+
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigconf.tex'.
